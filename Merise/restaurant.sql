@@ -1,7 +1,6 @@
 create database restaurant;
-go
+
 use restaurant
-go
 
 create table roles(
 	role_id int primary key AUTO_INCREMENT,
@@ -50,12 +49,12 @@ create table ratings(
 );
 
 insert into ratings(value, comment, user_id) values(4.5, 'This cozy restaurant has left the best impressions! Hospitable hosts, delicious dishes, beautiful presentation, wide wine list and wonderful dessert. I recommend to everyone! I would like to come back here again and again.', 1);
-insert into ratings(value, comment, user_id) values(4.2, 'It’s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.', 2);
+insert into ratings(value, comment, user_id) values(4.2, 'It s a great experience. The ambiance is very welcoming and charming. Amazing wines, food and service. Staff are extremely knowledgeable and make great recommendations.', 2);
 insert into ratings(value, comment, user_id) values(4.5, 'We are so fortunate to have this place just a few minutes drive away from home. Food is stunning, both the tapas and downstairs restaurant. Cocktails wow, wine great and lovely selection of beers. Love this place and will continue to visit.', 3);
 
 
 create table booking(
-	table_id int references tables(table_id) AUTO_INCREMENT,
+	table_id int references tables(table_id),
 	user_id int references users(user_id),
 	booking_date date,
 	note varchar(200),
@@ -110,7 +109,7 @@ create table payments(
 	user_id int references users(user_id)
 );
 
-create table [order](
+create table orders(
 	order_id int primary key AUTO_INCREMENT,
 	type varchar(30),
 	total_price decimal,
@@ -121,7 +120,7 @@ create table [order](
 
 create table order_line(
 	item_id int references menu(item_id),
-	order_id int references [order](order_id),
+	order_id int references order(order_id),
 	qte int,
 	note varchar(100),
 	primary key(item_id,order_id)
